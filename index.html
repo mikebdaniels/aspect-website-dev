@@ -64,7 +64,9 @@
       display: block;
       height: 22px;
       width: auto;
+      transition: filter 0.3s ease;
     }
+
 
     .nav-links {
       display: flex;
@@ -76,9 +78,9 @@
     .nav-links a {
       color: rgba(255,255,255,0.85);
       text-decoration: none;
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
@@ -200,6 +202,18 @@
       font-weight: 400;
     }
 
+    /* Logo-style colon — two stacked accent squares */
+    .logo-colon {
+      display: inline-block;
+      width: 0.14em;
+      height: 0.46em;
+      vertical-align: middle;
+      margin: 0 0.12em 0.1em 0.04em;
+      background:
+        linear-gradient(var(--accent), var(--accent)) top    / 100% 33.3% no-repeat,
+        linear-gradient(var(--accent), var(--accent)) bottom / 100% 33.3% no-repeat;
+    }
+
     .intro-sub {
       font-size: 17px;
       line-height: 1.6;
@@ -219,9 +233,9 @@
 
     .client-ticker__track {
       display: flex;
-      gap: 72px;
+      gap: 96px;
       width: max-content;
-      animation: ticker-scroll 45s linear infinite;
+      animation: ticker-scroll 75s linear infinite;
     }
 
     .client-ticker__item {
@@ -234,11 +248,11 @@
       width: auto;
       display: block;
       filter: brightness(0) invert(1);
-      opacity: 0.9;
-      transition: opacity 0.3s;
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
     }
 
-    .client-ticker__item img:hover { opacity: 1; }
+    .client-ticker__item:hover img { opacity: 1; }
 
     /* Per-logo heights for visual balance */
     .client-ticker__item img[src*="paramount"]   { height: 88px; }
@@ -268,7 +282,7 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 120px;
+      width: 180px;
       z-index: 2;
       pointer-events: none;
     }
@@ -411,15 +425,6 @@
 
     /* Grid mode: always left-justified, regardless of even/odd */
     .projects-grid.grid-view .project-card:nth-child(even) .card-info {
-      grid-template-columns: auto 1fr;
-    }
-    .projects-grid.grid-view .project-card:nth-child(even) .card-info::before {
-      grid-column: 1;
-    }
-    .projects-grid.grid-view .project-card:nth-child(even) .card-category,
-    .projects-grid.grid-view .project-card:nth-child(even) .card-title,
-    .projects-grid.grid-view .project-card:nth-child(even) .card-desc {
-      grid-column: 2;
       text-align: left;
     }
     .projects-grid.grid-view .project-card:nth-child(even) .card-category {
@@ -452,7 +457,7 @@
 
     /* ─── PROJECTS ─── */
     .projects-section {
-      padding: 40px 20px 60px;
+      padding: 120px 20px 60px;
       border-top: 1px solid var(--border);
     }
 
@@ -524,6 +529,27 @@
       border-radius: 6px;
     }
 
+    /* Edge-blur overlay — blurs the image beneath at the edges on hover */
+    .card-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.18);
+      mask-image: radial-gradient(ellipse at center, transparent 35%, black 95%);
+      -webkit-mask-image: radial-gradient(ellipse at center, transparent 35%, black 95%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 2;
+    }
+
+    .project-card:hover .card-thumb::after {
+      opacity: 1;
+    }
+
     .card-thumb img {
       display: block;
       width: 100%;
@@ -538,44 +564,17 @@
 
     .card-info {
       padding: 48px 52px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      column-gap: 12px;
-      align-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       transition: transform 0.3s ease;
     }
 
     .project-card:hover .card-info { transform: translateX(6px); }
     .project-card:nth-child(even):hover .card-info { transform: translateX(-6px); }
 
-    .card-info::before {
-      content: '';
-      grid-column: 1;
-      grid-row: 1 / -1;
-      background: var(--accent);
-      align-self: stretch;
-      aspect-ratio: 1 / 1;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .card-category,
-    .card-title,
-    .card-desc { grid-column: 2; }
-
     .project-card:nth-child(even) .card-info {
       border: none;
-      grid-template-columns: 1fr auto;
-    }
-
-    .project-card:nth-child(even) .card-info::before {
-      grid-column: 2;
-    }
-
-    .project-card:nth-child(even) .card-category,
-    .project-card:nth-child(even) .card-title,
-    .project-card:nth-child(even) .card-desc {
-      grid-column: 1;
       text-align: right;
     }
 
@@ -875,7 +874,8 @@
   <!-- INTRO -->
   <section class="intro-section" id="about">
 
-    <h1 class="intro-headline reveal">Aspect: Design sits at a rare intersection — full-service agency <em>meets</em> design boutique.</h1>
+    <span class="intro-eyebrow reveal">The Studio</span>
+    <h1 class="intro-headline reveal">Aspect<span class="logo-colon" aria-hidden="true"></span>Design sits at a rare intersection — full-service agency <em>meets</em> design boutique.</h1>
     <p class="intro-sub reveal">Powering the industry's largest marketing campaigns across film, television, and games, while quietly shaping a new standard for title design and title sequences.</p>
   </section>
 
