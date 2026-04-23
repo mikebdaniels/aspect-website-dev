@@ -1,0 +1,14 @@
+# Claude Code workspace (local config + preview settings)
+.claude/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonic the Hedgehog 4 — Aspect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f5f3;
+      --surface: #ffffff;
+      --border: #e0e0db;
+      --text: #1a1a1a;
+      --muted: #888888;
+      --accent: #249858;
+      --accent-light: #A3CF62;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      transition: backdrop-filter 0.3s ease, background 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(245,245,243,0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      display: block;
+      height: 22px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(26,26,26,0.5);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── VIDEO PLAYER ─── */
+    .video-section {
+      padding: 80px 20px 0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2.39 / 1;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-wrap:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; }
+    .video-wrap:fullscreen           { width: 100vw; height: 100vh; background: #000; }
+
+    .video-wrap:-webkit-full-screen video { width: 100%; height: 100%; object-fit: contain; }
+    .video-wrap:fullscreen video           { width: 100%; height: 100%; object-fit: contain; }
+
+    /* Centered pause overlay — shows when paused, hides on hover */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-wrap.paused .video-overlay { opacity: 1; }
+    .video-wrap:hover .video-overlay  { opacity: 0; }
+
+    .overlay-play-icon {
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+    }
+
+    /* Controls — only on hover */
+    .video-controls {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 80px 20px 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.4));
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-wrap:hover .video-controls { opacity: 1; }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-track {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.2);
+      pointer-events: none;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      width: 0%;
+      pointer-events: none;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .play-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, opacity 0.2s;
+      padding: 0;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover { transform: scale(1.12); }
+
+    .play-btn.playing .play-icon { display: none; }
+    .play-btn.playing .pause-icon { display: block; }
+    .play-btn .pause-icon { display: none; }
+
+    .ctrl-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn:hover { opacity: 1; }
+    .ctrl-btn.muted .vol-on { display: none; }
+    .ctrl-btn.muted .vol-off { display: flex; }
+    .ctrl-btn .vol-off { display: none; }
+
+    .spacer { flex: 1; }
+
+    .volume-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .volume-slider-wrap {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      height: 0;
+      overflow: hidden;
+      transition: height 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .volume-group:hover .volume-slider-wrap { height: 80px; }
+
+    .volume-slider {
+      -webkit-appearance: slider-vertical;
+      appearance: none;
+      writing-mode: vertical-lr;
+      direction: rtl;
+      width: 3px;
+      height: 72px;
+      background: rgba(255,255,255,0.3);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      border: none;
+    }
+
+    .video-title-block {
+      padding: 20px 0 0;
+    }
+
+    .video-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 68px;
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .video-category {
+      display: block;
+      margin-top: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ─── PROJECT BODY ─── */
+    .project-body {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px 0;
+    }
+
+    .project-intro {
+      padding-bottom: 60px;
+    }
+
+    .project-description {
+      max-width: 680px;
+    }
+
+    .project-description p {
+      line-height: 1.3;
+    }
+
+    .desc-primary {
+      font-size: 26px;
+      color: var(--text);
+      margin-bottom: 36px;
+    }
+
+    .desc-secondary {
+      font-size: 14px;
+      color: rgba(26,26,26,0.4);
+    }
+
+    .project-meta-col {
+      padding-top: 6px;
+    }
+
+    .meta-item {
+      margin-bottom: 28px;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(26,26,26,0.7);
+    }
+
+    /* ─── STILLS ─── */
+    .stills-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .stills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    /* Editorial layout: hero stills at 1, 14, 21 */
+    .still-item:nth-child(1),
+    .still-item:nth-child(14),
+    .still-item:nth-child(21) {
+      grid-column: 1 / -1;
+    }
+
+    .still-item {
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .still-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .still-item:hover img { transform: scale(1.04); }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(245,245,243,0.96);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.12);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      background: none; border: none;
+      color: rgba(26,26,26,0.4);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--text); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      color: rgba(26,26,26,0.3);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .lightbox-nav:hover { color: var(--text); }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    .lightbox-count {
+      position: absolute;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(26,26,26,0.35);
+    }
+
+    /* ─── CREDITS ─── */
+    .credits-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 120px 20px;
+    }
+
+    .credits-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .credits-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .credits-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .credits-group-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 36px;
+    }
+
+    .credit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      gap: 24px;
+    }
+
+    .credit-role {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(26,26,26,0.3);
+      flex-shrink: 0;
+    }
+
+    .credit-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-align: right;
+    }
+
+    /* ─── RELATED ─── */
+    .related-section {
+      border-top: 1px solid var(--border);
+      padding: 80px 20px;
+    }
+
+    .related-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .related-card {
+      text-decoration: none;
+      display: block;
+    }
+
+    .related-thumb {
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      background: #e0e0dc;
+      margin-bottom: 14px;
+    }
+
+    .related-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .related-card:hover .related-thumb img { transform: scale(1.04); }
+
+    .related-category {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .related-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--accent);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-address {
+      font-style: normal;
+      font-size: 10px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-address a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-address a:hover { color: #fff; }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    .footer-copy {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/brand/logo_mark.svg" alt="Aspect" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Work</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- VIDEO -->
+  <div class="video-section">
+    <div class="video-wrap">
+      <iframe
+        src="https://player.vimeo.com/video/1175290670?title=0&byline=0&portrait=0"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        allowfullscreen
+        title="Sonic the Hedgehog 4"></iframe>
+    </div>
+    <div class="video-title-block">
+      <h1 class="video-title">Sonic the Hedgehog 4</h1>
+      <span class="video-category">Title Reveal / Paramount Pictures</span>
+    </div>
+  </div>
+
+  <!-- PROJECT INTRO -->
+  <div class="project-body">
+    <div class="project-intro">
+      <div class="project-description">
+        <p class="desc-primary">A dimension-shattering title reveal built on the intricate beauty of colliding realities — every fracture, refraction, and dimensional tear crafted with obsessive detail.</p>
+        <p class="desc-secondary">Amy's hammer strikes and reality breaks apart. We travel through space and time, glimpsing each character through fragments of their world, before the dimensions converge into a single electrically charged logo reveal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STILLS -->
+  <div class="stills-section">
+    <h2 class="credits-title" style="margin-bottom: 48px;">Stills</h2>
+    <div class="stills-grid" id="stillsGrid">
+      <div class="still-item"><img src="assets/sonic/sonic4_still_01.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_02.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_03.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_04.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_05.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_06.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_07.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_08.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_09.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_10.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_11.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_12.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_13.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_14.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_15.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_16.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_17.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_18.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_19.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_20.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_21.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_22.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_23.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/sonic/sonic4_still_24.jpg" alt="" /></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</button>
+    <img class="lightbox-img" id="lbImg" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" id="lbNext">&#8250;</button>
+    <span class="lightbox-count" id="lbCount"></span>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="credits-section">
+    <h2 class="credits-title">Credits</h2>
+    <div class="credits-cols">
+      <div class="credits-group">
+        <p class="credits-group-label">Design Credits</p>
+        <div class="credit-row"><span class="credit-role">Design / Animation</span><span class="credit-name">Michael Daniels</span></div>
+        <div class="credit-row"><span class="credit-role">Houdini / FX</span><span class="credit-name">Julian Loscher</span></div>
+        <div class="credit-row"><span class="credit-role">Creative Director</span><span class="credit-name">Brad Colwell, Jon Berkowitz</span></div>
+        <div class="credit-row"><span class="credit-role">Senior Producer</span><span class="credit-name">Kate Lynn Abigail</span></div>
+        <div class="credit-row"><span class="credit-role">Graphics Coordinator</span><span class="credit-name">Marcella Maggio</span></div>
+      </div>
+      <div class="credits-group">
+        <p class="credits-group-label">Aspect Credits</p>
+        <div class="credit-row"><span class="credit-role">Executive Creative Director</span><span class="credit-name">Nati Braunstein</span></div>
+        <div class="credit-row"><span class="credit-role">Creative Director</span><span class="credit-name">Lauren Hutchinson</span></div>
+        <div class="credit-row"><span class="credit-role">Editor / Sound Design</span><span class="credit-name">Steve Mannella</span></div>
+        <div class="credit-row"><span class="credit-role">Associate Producer</span><span class="credit-name">Haley Vasquez</span></div>
+        <div class="credit-row"><span class="credit-role">Coordinator</span><span class="credit-name">Jasmine Perez</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="related-section">
+    <p class="related-label">More Work</p>
+    <div class="related-grid">
+      <a class="related-card" href="index.html">
+        <div class="related-thumb">
+          <img src="https://www.teamaspect.com/wp-content/uploads/2024/12/WITS_FINAL_MT_v2_HD.jpg" alt="Wicked" />
+        </div>
+        <p class="related-category">Title Sequence</p>
+        <p class="related-title">Wicked</p>
+      </a>
+      <a class="related-card" href="index.html">
+        <div class="related-thumb">
+          <img src="https://www.teamaspect.com/wp-content/uploads/2024/08/FUR_MT_16x9still.jpg" alt="Furiosa" />
+        </div>
+        <p class="related-category">Title Sequence</p>
+        <p class="related-title">Furiosa: A Mad Max Saga</p>
+      </a>
+      <a class="related-card" href="index.html">
+        <div class="related-thumb">
+          <img src="https://www.teamaspect.com/wp-content/uploads/2024/02/COPU_MOE_thumbnail08_v1_HD.jpg" alt="The Color Purple" />
+        </div>
+        <p class="related-category">Title Sequence</p>
+        <p class="related-title">The Color Purple</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <address class="footer-address">
+      123 Example Street, Suite 400<br>
+      Los Angeles, CA 90028<br>
+      <a href="tel:+13235550100">+1 (323) 555-0100</a>
+    </address>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Vimeo</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2026 Aspect</span>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Lightbox
+    const stills = [...document.querySelectorAll('.still-item img')];
+    const lb     = document.getElementById('lightbox');
+    const lbImg  = document.getElementById('lbImg');
+    const lbCount= document.getElementById('lbCount');
+    let current  = 0;
+
+    function openLb(i) {
+      current = i;
+      lbImg.src = stills[i].src;
+      lbCount.textContent = (i + 1) + ' / ' + stills.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function showLb(i) {
+      current = (i + stills.length) % stills.length;
+      lbImg.src = stills[current].src;
+      lbCount.textContent = (current + 1) + ' / ' + stills.length;
+    }
+
+    stills.forEach((img, i) => img.parentElement.addEventListener('click', () => openLb(i)));
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', () => showLb(current - 1));
+    document.getElementById('lbNext').addEventListener('click', () => showLb(current + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft')  showLb(current - 1);
+      if (e.key === 'ArrowRight') showLb(current + 1);
+    });
+  </script>
+</body>
+</html>
