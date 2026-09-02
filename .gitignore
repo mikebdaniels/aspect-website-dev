@@ -12,3 +12,9 @@ desktop.ini
 
 # Dependencies
 node_modules/
+
+# Source video files (kept locally; site references Vimeo)
+aspect work 2026/
+ae/
+*.mp4
+wicked-for-good-poster.jpg

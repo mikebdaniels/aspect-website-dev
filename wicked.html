@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sonic the Hedgehog 4 — Aspect</title>
+  <title>Wicked — Aspect</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -59,9 +59,7 @@
       display: block;
       height: 22px;
       width: auto;
-      transition: filter 0.3s ease;
     }
-
 
     .nav-links {
       display: flex;
@@ -72,26 +70,26 @@
     .nav-links a {
       color: rgba(26,26,26,0.5);
       text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
     .nav-links a:hover { color: var(--accent); }
 
-
     /* ─── VIDEO PLAYER ─── */
     .video-section {
-      padding: 80px 20px 0;
-      max-width: 1400px;
+      padding: 120px 20px 0;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .video-wrap {
       position: relative;
       width: 100%;
-      aspect-ratio: 2.39 / 1;
+      aspect-ratio: 12 / 5;
       overflow: hidden;
       background: #000;
     }
@@ -104,13 +102,36 @@
       border: 0;
     }
 
+    /* "Main Title" section (secondary video block) */
+    .main-title-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 60px;
+    }
+
+    .main-title-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .main-title-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
     .video-wrap:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; }
     .video-wrap:fullscreen           { width: 100vw; height: 100vh; background: #000; }
-
     .video-wrap:-webkit-full-screen video { width: 100%; height: 100%; object-fit: contain; }
     .video-wrap:fullscreen video           { width: 100%; height: 100%; object-fit: contain; }
 
-    /* Centered pause overlay — shows when paused, hides on hover */
     .video-overlay {
       position: absolute;
       inset: 0;
@@ -129,7 +150,6 @@
       filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
     }
 
-    /* Controls — only on hover */
     .video-controls {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -191,7 +211,6 @@
     }
 
     .play-btn:hover { transform: scale(1.12); }
-
     .play-btn.playing .play-icon { display: none; }
     .play-btn.playing .pause-icon { display: block; }
     .play-btn .pause-icon { display: none; }
@@ -239,25 +258,21 @@
 
     .volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: #fff;
       cursor: pointer;
     }
 
     .volume-slider::-moz-range-thumb {
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: #fff;
       cursor: pointer;
       border: none;
     }
 
-    .video-title-block {
-      padding: 20px 0 0;
-    }
+    .video-title-block { padding: 20px 0 0; }
 
     .video-title {
       font-family: 'DM Serif Display', serif;
@@ -280,22 +295,16 @@
 
     /* ─── PROJECT BODY ─── */
     .project-body {
-      max-width: 1400px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 60px 20px 0;
     }
 
-    .project-intro {
-      padding-bottom: 60px;
-    }
+    .project-intro { padding-bottom: 60px; }
 
-    .project-description {
-      max-width: 680px;
-    }
+    .project-description { max-width: 680px; }
 
-    .project-description p {
-      line-height: 1.3;
-    }
+    .project-description p { line-height: 1.3; }
 
     .desc-primary {
       font-size: 26px;
@@ -308,47 +317,56 @@
       color: rgba(26,26,26,0.4);
     }
 
-    .project-meta-col {
-      padding-top: 6px;
-    }
-
-    .meta-item {
-      margin-bottom: 28px;
-    }
-
-    .meta-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .meta-value {
-      font-size: 14px;
-      line-height: 1.5;
-      color: rgba(26,26,26,0.7);
-    }
-
     /* ─── STILLS ─── */
     .stills-section {
-      max-width: 1400px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 60px 20px;
     }
 
+    .stills-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .stills-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
     .stills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 3px;
     }
 
-    /* Editorial layout: hero stills at 1, 14, 21 */
+    /* Regular items: span 2 cols → 3 per row */
+    .still-item {
+      grid-column: span 2;
+    }
+
+    /* Heroes (full width) at 1, 6, 10, 14 */
     .still-item:nth-child(1),
-    .still-item:nth-child(14),
-    .still-item:nth-child(21) {
+    .still-item:nth-child(6),
+    .still-item:nth-child(10),
+    .still-item:nth-child(14) {
       grid-column: 1 / -1;
+    }
+
+    /* Paired 50/50 rows: 2-3, 4-5 */
+    .still-item:nth-child(2),
+    .still-item:nth-child(3),
+    .still-item:nth-child(4),
+    .still-item:nth-child(5) {
+      grid-column: span 3;
     }
 
     .still-item {
@@ -429,7 +447,7 @@
 
     /* ─── CREDITS ─── */
     .credits-section {
-      max-width: 1400px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 120px 20px;
     }
@@ -509,7 +527,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      max-width: 1400px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -608,7 +626,8 @@
       <img src="assets/brand/logo_mark.svg" alt="Aspect" />
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
   </nav>
@@ -617,15 +636,15 @@
   <div class="video-section">
     <div class="video-wrap">
       <iframe
-        src="https://player.vimeo.com/video/1175290670?title=0&byline=0&portrait=0"
+        src="https://player.vimeo.com/video/1223482094?title=0&byline=0&portrait=0"
         frameborder="0"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
         allowfullscreen
-        title="Sonic the Hedgehog 4"></iframe>
+        title="Wicked"></iframe>
     </div>
     <div class="video-title-block">
-      <h1 class="video-title">Sonic the Hedgehog 4</h1>
-      <span class="video-category">Title Reveal / Paramount Pictures</span>
+      <h1 class="video-title">Wicked</h1>
+      <span class="video-category">Title Sequence / Universal Pictures</span>
     </div>
   </div>
 
@@ -633,40 +652,59 @@
   <div class="project-body">
     <div class="project-intro">
       <div class="project-description">
-        <p class="desc-primary">A dimension-shattering title reveal built on the intricate beauty of colliding realities — every fracture, refraction, and dimensional tear crafted with obsessive detail.</p>
-        <p class="desc-secondary">Amy's hammer strikes and reality breaks apart. We travel through space and time, glimpsing each character through fragments of their world, before the dimensions converge into a single electrically charged logo reveal.</p>
+        <p class="desc-primary">A grand overture to Oz — a title sequence that answers Elphaba's cry with color, motion, and myth.</p>
+        <p class="desc-secondary">We opened the film the way the score does: with weight, with wonder, and with the sense that a story generations in the making was about to begin.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- MAIN TITLE -->
+  <div class="main-title-section">
+    <h2 class="main-title-heading">Main Title</h2>
+    <div class="video-wrap">
+      <iframe
+        src="https://player.vimeo.com/video/1223480549?title=0&byline=0&portrait=0"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        allowfullscreen
+        title="Wicked — Main Title"></iframe>
+    </div>
+  </div>
+
+  <!-- STUDIO LOGO -->
+  <div class="main-title-section">
+    <h2 class="main-title-heading">Studio Logo</h2>
+    <div class="video-wrap">
+      <iframe
+        src="https://player.vimeo.com/video/1223482091?title=0&byline=0&portrait=0"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        allowfullscreen
+        title="Wicked — Studio Logo"></iframe>
     </div>
   </div>
 
   <!-- STILLS -->
   <div class="stills-section">
-    <h2 class="credits-title" style="margin-bottom: 48px;">Stills</h2>
+    <h2 class="stills-title">Stills</h2>
     <div class="stills-grid" id="stillsGrid">
-      <div class="still-item"><img src="assets/sonic/sonic4_still_01.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_02.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_03.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_04.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_05.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_06.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_07.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_08.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_09.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_10.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_11.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_12.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_13.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_14.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_15.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_16.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_17.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_18.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_19.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_20.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_21.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_22.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_23.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/sonic/sonic4_still_24.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_01.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_02.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_03.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_04.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_05.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_06.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_07.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_08.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_09.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_10.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_11.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_12.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_13.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_14.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_15.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_16.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/wicked/still_17.jpg" alt="" /></div>
     </div>
   </div>
 
@@ -683,12 +721,19 @@
   <div class="related-section">
     <p class="related-label">More Work</p>
     <div class="related-grid">
-      <a class="related-card" href="wicked.html">
+      <a class="related-card" href="wicked-for-good.html">
         <div class="related-thumb">
-          <img src="assets/wicked/title_card.jpg" alt="Wicked" />
+          <img src="https://www.teamaspect.com/wp-content/uploads/2026/01/WITS_ForGood_MOE_Title_v1alt.jpg" alt="Wicked: For Good" />
         </div>
         <p class="related-category">Title Sequence</p>
-        <p class="related-title">Wicked</p>
+        <p class="related-title">Wicked: For Good</p>
+      </a>
+      <a class="related-card" href="sonic-4.html">
+        <div class="related-thumb">
+          <img src="assets/sonic/title_card.jpg" alt="Sonic the Hedgehog 4" />
+        </div>
+        <p class="related-category">Title Reveal</p>
+        <p class="related-title">Sonic the Hedgehog 4</p>
       </a>
       <a class="related-card" href="furiosa.html">
         <div class="related-thumb">
@@ -696,13 +741,6 @@
         </div>
         <p class="related-category">Title Sequence</p>
         <p class="related-title">Furiosa</p>
-      </a>
-      <a class="related-card" href="color-purple.html">
-        <div class="related-thumb">
-          <img src="assets/color-purple/title_card.jpg" alt="The Color Purple" />
-        </div>
-        <p class="related-category">Main on Ends</p>
-        <p class="related-title">The Color Purple</p>
       </a>
     </div>
   </div>

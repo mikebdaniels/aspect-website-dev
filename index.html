@@ -527,6 +527,7 @@
       overflow: hidden;
       background: #e8e8e4;
       border-radius: 6px;
+      aspect-ratio: 16 / 9;
     }
 
     /* Edge-blur overlay — blurs the image beneath at the edges on hover */
@@ -554,12 +555,20 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .project-card:hover .card-thumb img {
       transform: scale(1.03);
+    }
+
+    /* Sonic tile: scale thumbnail 15% larger */
+    .card-thumb img[src*="assets/sonic/"] {
+      transform: scale(1.15);
+    }
+    .project-card:hover .card-thumb img[src*="assets/sonic/"] {
+      transform: scale(1.18);
     }
 
     .card-info {
@@ -789,32 +798,6 @@
       grid-template-columns: 7fr 9fr;
     }
 
-    /* Hide cards 6+ in default list view unless expanded or in grid mode */
-    .projects-grid:not(.grid-view):not(.expanded) .project-card:nth-child(n+6) {
-      display: none;
-    }
-
-    .more-btn {
-      display: block;
-      margin: 40px auto 0;
-      padding: 12px 32px;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .more-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    .projects-grid.grid-view ~ .more-btn { display: none; }
-
     @media (max-width: 820px) {
       .intro-section { padding: 90px 24px; }
       .intro-headline { font-size: 44px; }
@@ -879,47 +862,10 @@
     <p class="intro-sub reveal">Powering the industry's largest marketing campaigns across film, television, and games, while quietly shaping a new standard for title design and title sequences.</p>
   </section>
 
-  <!-- CLIENT TICKER -->
-  <section class="client-ticker reveal">
-    <div class="client-ticker__track">
-      <span class="client-ticker__item"><img src="assets/logos/paramount.svg" alt="Paramount" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/warner-bros.svg" alt="Warner Bros." /></span>
-      <span class="client-ticker__item"><img src="assets/logos/universal.svg" alt="Universal" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/marvel.svg" alt="Marvel" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/sony.svg" alt="Sony" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/apple.svg" alt="Apple" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/disney.svg" alt="Disney" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/netflix.svg" alt="Netflix" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/hbo.svg" alt="HBO" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/amazon.svg" alt="Amazon" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/lionsgate.svg" alt="Lionsgate" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/lucasfilm.svg" alt="Lucasfilm" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/dreamworks.png" alt="DreamWorks" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/dc-comics.png" alt="DC Comics" /></span>
-      <span class="client-ticker__item"><img src="assets/logos/imax.svg" alt="IMAX" /></span>
-      <!-- duplicated for seamless loop -->
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/paramount.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/warner-bros.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/universal.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/marvel.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/sony.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/apple.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/disney.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/netflix.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/hbo.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/amazon.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/lionsgate.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/lucasfilm.svg" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/dreamworks.png" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/dc-comics.png" alt="" /></span>
-      <span class="client-ticker__item" aria-hidden="true"><img src="assets/logos/imax.svg" alt="" /></span>
-    </div>
-  </section>
-
   <!-- PROJECTS -->
   <section class="projects-section" id="work">
 
-    <div class="work-controls reveal">
+<div class="work-controls reveal">
       <div class="view-toggle">
         <button class="view-btn active" data-view="list" aria-label="List view">
           <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
@@ -955,7 +901,7 @@
 
       <article class="project-card" onclick="location.href='sonic-4.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2026/03/SONIC4_DIGITAL_DOM-TRLR-1-NO-GC_TXTD_STEREO_HD_PRORES_2398_031026-00780.jpg" alt="Sonic the Hedgehog 4" loading="lazy" />
+          <img src="assets/sonic/title_card.jpg" alt="Sonic the Hedgehog 4" loading="lazy" />
         </div>
         <div class="card-info">
           <p class="card-category">Title Reveal / Paramount</p>
@@ -964,7 +910,7 @@
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='wicked-for-good.html'" style="cursor:pointer;">
         <div class="card-thumb">
           <img src="https://www.teamaspect.com/wp-content/uploads/2026/01/WITS_ForGood_MOE_Title_v1alt.jpg" alt="Wicked: For Good" loading="lazy" />
         </div>
@@ -975,176 +921,117 @@
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='wicked.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2024/12/WITS_FINAL_MT_v2_HD.jpg" alt="Wicked" loading="lazy" />
+          <img src="assets/wicked/title_card.jpg" alt="Wicked" loading="lazy" />
         </div>
         <div class="card-info">
-
           <p class="card-category">Title Sequence / Universal</p>
           <h2 class="card-title">Wicked</h2>
           <p class="card-desc">Pink meets green. Sparks fly.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='bo4-teaser.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2024/02/EMER_Tsr_TitleReveal_v18-00375.jpg" alt="Sonic the Hedgehog 3" loading="lazy" />
+          <img src="assets/bo4-teaser/title_card.jpg" alt="Call of Duty: Black Ops 4" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Title Reveal / Paramount</p>
-          <h2 class="card-title">Sonic the Hedgehog 3</h2>
-          <p class="card-desc">Gotta design fast.</p>
+          <p class="card-category">Teaser Animation / Activision</p>
+          <h2 class="card-title">Call of Duty: Black Ops 4</h2>
+          <p class="card-desc">Boots on the ground, again.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='bo6-story-so-far.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2024/08/FUR_MT_16x9still.jpg" alt="Furiosa: A Mad Max Saga" loading="lazy" />
+          <img src="assets/bo6-story-so-far/title_card.jpg" alt="Call of Duty: Black Ops 6" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Trailer Design / Warner Bros.</p>
-          <h2 class="card-title">Furiosa: A Mad Max Saga</h2>
-          <p class="card-desc">Chrome, dust, and diesel prayers.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2024/02/COPU_MOE_thumbnail08_v1_HD.jpg" alt="The Color Purple" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">Title Sequence / Warner Bros.</p>
-          <h2 class="card-title">The Color Purple</h2>
-          <p class="card-desc">Letters that sing out loud.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2022/11/CLOV_Thumbnail_v1.jpg" alt="She-Hulk: Attorney at Law" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">Title Sequence / Marvel</p>
-          <h2 class="card-title">She-Hulk: Attorney at Law</h2>
-          <p class="card-desc">Objection, your honor. Also: smash.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2025/07/Until_Dawn_thumb_HD.jpg" alt="Until Dawn" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">End Credits / Sony</p>
-          <h2 class="card-title">Until Dawn</h2>
-          <p class="card-desc">Don't fall asleep. Don't blink either.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2024/06/CSSF_CODChannel_Thumb_1280x720_v1_sa.png" alt="Call of Duty: Black Ops 6" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">Animation / Activision</p>
+          <p class="card-category">Cinematic / Activision</p>
           <h2 class="card-title">Call of Duty: Black Ops 6</h2>
           <p class="card-desc">Previously, on chaos.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='bo7-story-so-far.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2023/08/PJMR_Thumbnail_1920x1080_OfficialTeaser_MakrovFace_v03_HF_LINKEDIN-THUMB.jpg" alt="Call of Duty: Modern Warfare III" loading="lazy" />
+          <img src="assets/bo7-story-so-far/title_card.jpg" alt="Call of Duty: Black Ops 7" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Teaser / Activision</p>
-          <h2 class="card-title">Call of Duty: Modern Warfare III</h2>
-          <p class="card-desc">The calm before the boom.</p>
+          <p class="card-category">Cinematic / Activision</p>
+          <h2 class="card-title">Call of Duty: Black Ops 7</h2>
+          <p class="card-desc">The war after the war.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='furiosa.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2023/04/SHAZ_Dragon_1920x1080.jpg" alt="Shazam! Fury of the Gods" loading="lazy" />
+          <img src="assets/furiosa/title_card.jpg" alt="Furiosa" loading="lazy" />
         </div>
         <div class="card-info">
-
           <p class="card-category">Title Sequence / Warner Bros.</p>
+          <h2 class="card-title">Furiosa</h2>
+          <p class="card-desc">Chrome, dust, and diesel prayers.</p>
+        </div>
+      </article>
+
+      <article class="project-card" onclick="location.href='she-hulk.html'" style="cursor:pointer;">
+        <div class="card-thumb">
+          <img src="assets/she-hulk/title_card.jpg" alt="She-Hulk" loading="lazy" />
+        </div>
+        <div class="card-info">
+          <p class="card-category">Title Sequence / Marvel</p>
+          <h2 class="card-title">She-Hulk</h2>
+          <p class="card-desc">Objection, your honor. Also: smash.</p>
+        </div>
+      </article>
+
+      <article class="project-card" onclick="location.href='shazam-2.html'" style="cursor:pointer;">
+        <div class="card-thumb">
+          <img src="assets/shazam-2/title_card.jpg" alt="Shazam! Fury of the Gods" loading="lazy" />
+        </div>
+        <div class="card-info">
+          <p class="card-category">Main on Ends / Warner Bros.</p>
           <h2 class="card-title">Shazam! Fury of the Gods</h2>
           <p class="card-desc">Lightning, now with a punchline.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='color-purple.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2022/08/Flash_MT.png" alt="The Flash" loading="lazy" />
+          <img src="assets/color-purple/title_card.jpg" alt="The Color Purple" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Title Sequence / Warner Bros.</p>
-          <h2 class="card-title">The Flash</h2>
-          <p class="card-desc">Time is more of a suggestion.</p>
+          <p class="card-category">Main on Ends / Warner Bros.</p>
+          <h2 class="card-title">The Color Purple</h2>
+          <p class="card-desc">Letters that sing out loud.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='until-dawn.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2018/08/CRA_FimGov_MT_Cascade_v05_nb_HD_FF.jpg" alt="Crazy Rich Asians" loading="lazy" />
+          <img src="assets/until-dawn/title_card.jpg" alt="Until Dawn" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Title Sequence / Warner Bros.</p>
-          <h2 class="card-title">Crazy Rich Asians</h2>
-          <p class="card-desc">Gold leaf. No expense spared.</p>
+          <p class="card-category">Main on Ends / Sony Pictures</p>
+          <h2 class="card-title">Until Dawn</h2>
+          <p class="card-desc">Don't fall asleep. Don't blink either.</p>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" onclick="location.href='home-before-dark.html'" style="cursor:pointer;">
         <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2018/07/GME_COMP_v01_jg.png" alt="Game Night" loading="lazy" />
+          <img src="assets/home-before-dark/title_card.jpg" alt="Home Before Dark" loading="lazy" />
         </div>
         <div class="card-info">
-
-          <p class="card-category">Title Sequence / Warner Bros.</p>
-          <h2 class="card-title">Game Night</h2>
-          <p class="card-desc">Roll the dice. Or get rolled.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2022/08/HBD_Hilde_Vision-2.png" alt="Home Before Dark: Season 2" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">Title Sequence / Apple TV+</p>
-          <h2 class="card-title">Home Before Dark: Season 2</h2>
+          <p class="card-category">Animation / Apple TV</p>
+          <h2 class="card-title">Home Before Dark</h2>
           <p class="card-desc">Small town. Big fever dream.</p>
         </div>
       </article>
 
-      <article class="project-card">
-        <div class="card-thumb">
-          <img src="https://www.teamaspect.com/wp-content/uploads/2020/08/Flora_MT_thumb.png" alt="Home Before Dark: Season 1" loading="lazy" />
-        </div>
-        <div class="card-info">
-
-          <p class="card-category">Title Sequence / Apple TV+</p>
-          <h2 class="card-title">Home Before Dark: Season 1</h2>
-          <p class="card-desc">Paper, ink, and local secrets.</p>
-        </div>
-      </article>
-
     </div>
-    <button class="more-btn" id="more-btn">More Projects</button>
   </section>
 
   <!-- CONTACT -->
@@ -1171,25 +1058,15 @@
         <p class="contact-name">Kim Tang</p>
         <a class="contact-email" href="mailto:kim.t@teamaspect.com">kim.t@teamaspect.com</a>
       </div>
-      <div class="contact-col">
-        <span class="contact-label">AI Evangelist</span>
-        <p class="contact-name">Mike Daniels</p>
-        <a class="contact-email" href="mailto:mike.d@teamaspect.com">mike.d@teamaspect.com</a>
-      </div>
-      <div class="contact-col">
-        <span class="contact-label">Shogun</span>
-        <p class="contact-name">Nolan Borkenhagen</p>
-        <a class="contact-email" href="mailto:nolan.b@teamaspect.com">nolan.b@teamaspect.com</a>
-      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <address class="footer-address">
-      123 Example Street, Suite 400<br>
-      Los Angeles, CA 90028<br>
-      <a href="tel:+13235550100">+1 (323) 555-0100</a>
+      5161 Lankershim Blvd #300<br>
+      North Hollywood, CA 91601<br>
+      <a href="tel:+13234672121">+1 (323) 467-2121</a>
     </address>
     <ul class="footer-links">
       <li><a href="#">Instagram</a></li>
@@ -1200,6 +1077,8 @@
   </footer>
 
   <script>
+    const grid = document.querySelector('.projects-grid');
+
     // View toggle
     document.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1207,7 +1086,6 @@
         btn.classList.add('active');
         const isGrid = btn.dataset.view === 'grid';
         grid.classList.toggle('grid-view', isGrid);
-        moreBtn.style.display = isGrid ? 'none' : (grid.classList.contains('expanded') ? 'none' : '');
       });
     });
 
@@ -1233,15 +1111,13 @@
       const q = this.value.toLowerCase().trim();
 
       if (q) {
-        grid.classList.add('grid-view', 'expanded');
-        moreBtn.style.display = 'none';
+        grid.classList.add('grid-view');
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-view="grid"]').classList.add('active');
       } else {
-        grid.classList.remove('grid-view', 'expanded');
+        grid.classList.remove('grid-view');
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-view="list"]').classList.add('active');
-        moreBtn.style.display = '';
       }
 
       document.querySelectorAll('.project-card').forEach(card => {
@@ -1250,19 +1126,11 @@
       });
     });
 
-    // More projects toggle
-    const moreBtn = document.getElementById('more-btn');
-    const grid = document.querySelector('.projects-grid');
-    moreBtn.addEventListener('click', () => {
-      grid.classList.add('expanded');
-      moreBtn.style.display = 'none';
-    });
-
     // Scroll-in reveal — auto-tag major elements, observe them
     (() => {
       const selectors = [
-        '.intro-headline', '.intro-sub', '.client-ticker',
-        '.work-controls', '.project-card', '.more-btn',
+        '.intro-headline', '.intro-sub',
+        '.work-controls', '.project-card',
         '.contact-headline', '.contact-col'
       ];
       document.querySelectorAll(selectors.join(',')).forEach(el => el.classList.add('reveal'));
@@ -1310,5 +1178,6 @@
     });
 
   </script>
+
 </body>
 </html>
