@@ -1,5 +1,21 @@
-ASPECT — PROJECT WRITE-UPS
+ASPECT — SITE COPY
 ============================================================
+
+ABOUT SECTION (homepage)
+------------------------------------------------------------
+
+Eyebrow:  The Studio
+
+Headline:
+  Aspect:Design sits at a rare intersection — full-service agency meets design boutique.
+
+Sub:
+  Powering the industry's largest marketing campaigns across film, television, and games, while quietly shaping a new standard for title design and title sequences.
+
+============================================================
+
+PROJECT WRITE-UPS
+------------------------------------------------------------
 
 TITLE:     Sonic the Hedgehog 4
 CATEGORY:  Title Reveal
@@ -37,6 +53,19 @@ FILE:      wicked.html
 
   Secondary:
   We opened the film the way the score does: with weight, with wonder, and with the sense that a story generations in the making was about to begin.
+
+------------------------------------------------------------
+
+TITLE:     Home Before Dark
+CATEGORY:  Animation
+CLIENT:    Apple TV
+FILE:      home-before-dark.html
+
+  Primary:
+  A recurring open that reads like a child's field journal — pencil, polaroid, and the quiet dread of a small town holding a secret.
+
+  Secondary:
+  We shaped the sequence around Hilde's investigations: newsprint clippings, red string, and location fragments that the season's mystery pulls the viewer through.
 
 ------------------------------------------------------------
 
@@ -141,19 +170,6 @@ FILE:      until-dawn.html
 
   Secondary:
   We treated the sequence as an epilogue: fragments of the survivors' story surfacing in flickers, so the audience leaves the theater still turning the film over.
-
-------------------------------------------------------------
-
-TITLE:     Home Before Dark
-CATEGORY:  Animation
-CLIENT:    Apple TV
-FILE:      home-before-dark.html
-
-  Primary:
-  A recurring open that reads like a child's field journal — pencil, polaroid, and the quiet dread of a small town holding a secret.
-
-  Secondary:
-  We shaped the sequence around Hilde's investigations: newsprint clippings, red string, and location fragments that the season's mystery pulls the viewer through.
 
 ------------------------------------------------------------
 
