@@ -457,7 +457,7 @@
 
     /* ─── PROJECTS ─── */
     .projects-section {
-      padding: 120px 20px 60px;
+      padding: 120px 20px 140px;
       border-top: 1px solid var(--border);
     }
 
@@ -805,8 +805,11 @@
       .intro-headline { font-size: 44px; }
       .intro-sub { font-size: 15px; }
 
-      .project-card,
-      .project-card:nth-child(even) {
+      /* Override desktop's `.projects-grid:not(.grid-view) .project-card` alternating columns */
+      .projects-grid .project-card,
+      .projects-grid .project-card:nth-child(even),
+      .projects-grid:not(.grid-view) .project-card,
+      .projects-grid:not(.grid-view) .project-card:nth-child(even) {
         grid-template-columns: 1fr;
       }
       .project-card:nth-child(even) .card-thumb-wrap { order: unset; }
@@ -837,12 +840,7 @@
     <a class="nav-logo" href="#">
       <img src="assets/brand/logo_mark.svg" alt="Aspect" height="32" />
     </a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    </nav>
 
   <!-- REEL -->
   <section class="reel-section">
@@ -856,7 +854,7 @@
     <span class="reel-scroll-hint">Scroll to explore</span>
   </section>
 
-  <!-- INTRO -->
+  <!-- INTRO / ABOUT -->
   <section class="intro-section" id="about">
 
     <span class="intro-eyebrow reveal">The Studio</span>
@@ -1047,7 +1045,8 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT — hidden for now; un-comment to re-enable -->
+  <!--
   <section class="contact-section" id="contact">
     <h2 class="contact-headline reveal">Let's make something<br class="headline-break"> <span class="headline-rotator" id="rotator">epic</span>.</h2>
     <div class="contact-grid reveal">
@@ -1073,6 +1072,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- FOOTER -->
   <footer>
@@ -1081,7 +1081,7 @@
       North Hollywood, CA 91601<br>
       <a href="tel:+13234672121">+1 (323) 467-2121</a>
     </address>
-    <span class="footer-copy">&copy; 2024 Aspect</span>
+    <span class="footer-copy">&copy; 2026 Aspect</span>
   </footer>
 
   <script>
