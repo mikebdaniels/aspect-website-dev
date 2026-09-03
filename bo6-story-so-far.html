@@ -167,15 +167,19 @@
     /* Regular items: span 2 cols → 3 per row */
     .still-item { grid-column: span 2; }
 
-    /* Hero items: full width */
+    /* Heroes (full width) at 1, 12 */
     .still-item:nth-child(1),
-    .still-item:nth-child(11) {
+    .still-item:nth-child(12) {
       grid-column: 1 / -1;
     }
 
-    /* Paired 50/50 row at end */
-    .still-item:nth-child(21),
-    .still-item:nth-child(22) {
+    /* Paired 50/50 rows: 8-9, 10-11, 16-17 */
+    .still-item:nth-child(8),
+    .still-item:nth-child(9),
+    .still-item:nth-child(10),
+    .still-item:nth-child(11),
+    .still-item:nth-child(16),
+    .still-item:nth-child(17) {
       grid-column: span 3;
     }
 
@@ -502,6 +506,7 @@
       <div class="still-item"><img src="assets/bo6-story-so-far/still_20.jpg" alt="" /></div>
       <div class="still-item"><img src="assets/bo6-story-so-far/still_21.jpg" alt="" /></div>
       <div class="still-item"><img src="assets/bo6-story-so-far/still_22.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/bo6-story-so-far/still_23.jpg" alt="" /></div>
     </div>
   </div>
 
