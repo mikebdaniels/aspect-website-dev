@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Until Dawn — Aspect</title>
+  <title>Shazam! — Aspect</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
     .video-wrap {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 12 / 5;
       overflow: hidden;
       background: #000;
     }
@@ -160,13 +160,23 @@
 
     .still-item { grid-column: span 2; overflow: hidden; cursor: zoom-in; }
 
-    /* Heroes (full width) at 1, 8 */
+    /* Heroes (full width) at 1, 12, 24, 36 */
     .still-item:nth-child(1),
-    .still-item:nth-child(8) { grid-column: 1 / -1; }
-
-    /* Paired 50/50 row: 12-13 */
     .still-item:nth-child(12),
-    .still-item:nth-child(13) { grid-column: span 3; }
+    .still-item:nth-child(24),
+    .still-item:nth-child(36) { grid-column: 1 / -1; }
+
+    /* Paired 50/50 rows: 8-9, 10-11, 16-17, 28-29, 37-38 */
+    .still-item:nth-child(8),
+    .still-item:nth-child(9),
+    .still-item:nth-child(10),
+    .still-item:nth-child(11),
+    .still-item:nth-child(16),
+    .still-item:nth-child(17),
+    .still-item:nth-child(28),
+    .still-item:nth-child(29),
+    .still-item:nth-child(37),
+    .still-item:nth-child(38) { grid-column: span 3; }
 
     .still-item img {
       width: 100%;
@@ -372,22 +382,22 @@
   <div class="video-section">
     <div class="video-wrap">
       <iframe
-        src="https://player.vimeo.com/video/1223473265?title=0&byline=0&portrait=0"
+        src="https://player.vimeo.com/video/1223842589?title=0&byline=0&portrait=0"
         frameborder="0"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
         allowfullscreen
-        title="Until Dawn"></iframe>
+        title="Shazam!"></iframe>
     </div>
     <div class="video-title-block">
-      <h1 class="video-title">Until Dawn</h1>
-      <span class="video-category">Main on Ends | Sony Pictures</span>
+      <h1 class="video-title">Shazam!</h1>
+      <span class="video-category">Main on Ends | Warner Bros.</span>
     </div>
   </div>
 
   <div class="project-body">
     <div class="project-intro">
       <div class="project-description">
-        <p class="desc-primary">End credits that keep the dread alive — analog flyers, decaying photographs, and creeping motion long after the last cut.</p>
+        <p class="desc-primary">A Main on Ends sequence that keeps the origin story running — comic-book energy, hand-drawn wit, and the Rock of Eternity brought to life in ink.</p>
       </div>
     </div>
   </div>
@@ -395,19 +405,53 @@
   <div class="stills-section">
     <h2 class="stills-title">Stills</h2>
     <div class="stills-grid" id="stillsGrid">
-      <div class="still-item"><img src="assets/until-dawn/still_01.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_02.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_03.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_04.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_05.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_06.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_07.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_08.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_09.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_10.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_11.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_12.jpg" alt="" /></div>
-      <div class="still-item"><img src="assets/until-dawn/still_13.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_01.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_02.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_03.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_04.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_05.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_06.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_07.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_08.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_09.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_10.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_11.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_12.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_13.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_14.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_15.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_16.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_17.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_18.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_19.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_20.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_21.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_22.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_23.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_24.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_25.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_26.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_27.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_28.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_29.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_30.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_31.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_32.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_33.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_34.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_35.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_36.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_37.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_38.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_39.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_40.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_41.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_42.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_43.jpg" alt="" /></div>
+      <div class="still-item"><img src="assets/shazam-1/still_44.jpg" alt="" /></div>
+    </div>
+    </div>
+    </div>
     </div>
   </div>
 
@@ -422,13 +466,6 @@
   <div class="related-section">
     <p class="related-label">More Work</p>
     <div class="related-grid">
-      <a class="related-card" href="shazam-2.html">
-        <div class="related-thumb">
-          <img src="assets/shazam-2/title_card.jpg" alt="Shazam! Fury of the Gods" />
-        </div>
-        <p class="related-category">Main on Ends</p>
-        <p class="related-title">Shazam! Fury of the Gods</p>
-      </a>
       <a class="related-card" href="color-purple.html">
         <div class="related-thumb">
           <img src="assets/color-purple/title_card.jpg" alt="The Color Purple" />
@@ -436,12 +473,19 @@
         <p class="related-category">Main on Ends</p>
         <p class="related-title">The Color Purple</p>
       </a>
-      <a class="related-card" href="sonic-4.html">
+      <a class="related-card" href="until-dawn.html">
         <div class="related-thumb">
-          <img src="assets/sonic/title_card.jpg" alt="Sonic the Hedgehog 4" />
+          <img src="assets/until-dawn/title_card.jpg" alt="Until Dawn" />
         </div>
-        <p class="related-category">Title Reveal</p>
-        <p class="related-title">Sonic the Hedgehog 4</p>
+        <p class="related-category">Main on Ends</p>
+        <p class="related-title">Until Dawn</p>
+      </a>
+      <a class="related-card" href="furiosa.html">
+        <div class="related-thumb">
+          <img src="assets/furiosa/title_card.jpg" alt="Furiosa" />
+        </div>
+        <p class="related-category">Title Sequence</p>
+        <p class="related-title">Furiosa</p>
       </a>
     
     </div>

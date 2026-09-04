@@ -85,7 +85,7 @@ To swap a video: just replace the video ID in the iframe `src` on the page.
 
 ## Source assets not in this repo
 
-The AE project files (`ae/`) and the ~6 GB of source videos (`aspect work 2026/`) are gitignored — they live in Dropbox. Ask Mike for the share links if you need them (usually you don't, unless you're extracting new stills).
+All AE project files, source videos, and exports live in `ae_projectFiles/` (with `_assets/`, `_exports/`, and per-project `.aep` files inside). Gitignored, so they don't get pushed — they stay in Dropbox. Ask Mike for the share link if you need them (usually you don't, unless you're extracting new stills).
 
 ## Custom domain
 
